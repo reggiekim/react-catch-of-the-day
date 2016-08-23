@@ -1,6 +1,14 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
+var ReactRouter = require("react-router");
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var Navigation = ReactRouter.Navigation;
+
+var createBrowserHistory = require("history/lib/createBrowserHistory");
+
+
 /*
   App component
 */
@@ -79,7 +87,6 @@ var Inventory = React.createClass({
 var StorePicker = React.createClass({
 
   render: function() {
-    var name = "Reggie"
     // dbl backslashes or backslash-star can be used for comments, just like in regular JS
     return (
       <form className="store-selector">
@@ -92,5 +99,28 @@ var StorePicker = React.createClass({
   }
 });
 
+/*
+  Not Found Route
+*/
+var NotFound = React.createClass({
 
-ReactDOM.render(<App/>, document.querySelector("#main"));
+  render: function() {
+    return(
+      <h1>Error, page not found!</h1>
+    )
+  }
+});
+
+
+/*
+  Routes
+*/
+var routes = (
+  <Router history={createBrowserHistory()}>
+    <Route path="/" component={StorePicker} />
+    <Route path="/store/:storeId" component={App} />
+    <Route path="*" component={NotFound} />
+  </Router>
+)
+
+ReactDOM.render(routes, document.querySelector("#main"));
