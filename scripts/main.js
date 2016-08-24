@@ -24,6 +24,7 @@ var App = React.createClass({
   },
 
   addFish : function(fish) {
+    // timestamp creates a unique milisecond timestamp
     var timestamp = (new Date()).getTime();
     //update the state object
     this.state.fishes['fish-'+timestamp] = fish;
@@ -39,7 +40,7 @@ var App = React.createClass({
           <Header tagline="Fresh Seafood Market" />
         </div>
         <Order />
-        <Inventory />
+        <Inventory addFish={this.addFish} />
       </div>
     )
   }
@@ -64,16 +65,18 @@ var AddFishForm = React.createClass({
       desc : this.refs.desc.value,
       image : this.refs.image.value
     }
-
-    console.log(fish);
+    // console.log(fish);
 
     //Add the fish the App state
+    this.props.addFish(fish);
+    this.refs.fishForm.reset();
+      //clears the form
   },
 
   render : function () {
     return (
       //<p>Testing this is the fish form</p>
-      <form className="fish-edit" onSubmit={this.createFish}>
+      <form className="fish-edit" ref="fishForm" onSubmit={this.createFish}>
         <input type="text" ref="name" placeholder="Fish Name" />
         <input type="text" ref="price" placeholder="Fish Price" />
         <select ref="status">
@@ -137,7 +140,7 @@ var Inventory = React.createClass({
       <div>
         <h2>Inventory</h2>
 
-        <AddFishForm />
+        <AddFishForm {...this.props} />
       </div>
     )
   }
