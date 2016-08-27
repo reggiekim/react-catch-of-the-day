@@ -34,6 +34,10 @@ var App = React.createClass({
     });
   },
 
+  componentWillUpdate : function (nextProps, nextState) {
+    console.log(nextState);
+  },
+
   addToOrder : function(key) {
     this.state.order[key] = this.state.order[key] +1 || 1;
     this.setState({ order : this.state.order });
