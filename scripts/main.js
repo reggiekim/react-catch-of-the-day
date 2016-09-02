@@ -15,6 +15,9 @@ var h = require("./helpers");
 var Rebase = require("re-base");
 var base = Rebase.createClass("https://react-catch-of-the-day-a5a64.firebaseio.com");
 
+
+var Catalyst = require("react-catalyst");
+
 /*
   App component
 */
