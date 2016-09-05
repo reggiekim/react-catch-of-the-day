@@ -69,10 +69,12 @@ var App = React.createClass({
   },
 
   removeFish : function (key) {
-    this.state.fishes[key] = null;
-    this.setState({
-      fishes : this.state.fishes
-    })
+    if(confirm("Are you sure you want to remove this fish?")){
+      this.state.fishes[key] = null;
+      this.setState({
+        fishes : this.state.fishes
+      })
+    }
   },
 
   loadSamples : function() {
